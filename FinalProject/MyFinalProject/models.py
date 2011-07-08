@@ -36,7 +36,6 @@ class History(models.Model):
 	OrderId =models.ForeignKey(Order)
 	CustomerId=models.ForeignKey(Customer)
 	total=models.FloatField()
-	ifpaid=models.BooleanField(default=False)
 	def __unicode__(self):
 		return str(self.total)
 
@@ -46,7 +45,8 @@ class OrderInline(admin.TabularInline):
 	model = Order
 class HistoryInline(admin.TabularInline):
 	model=History
-
+class CustomerInline(admin.TabularInline):
+	model=Customer
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -69,11 +69,12 @@ class PaymentAdmin(admin.ModelAdmin):
 	search_fields = ('date',)
 	
 class OrderAdmin(admin.ModelAdmin):
-	list_display = ('OrderId','quantity','item')
+	list_display = ('quantity','item')
 	search_fields = ('item',)
 
 class HistoryAdmin(admin.ModelAdmin):
-	list_display =('OrderId','CustomerId','total','ifpaid')
+	list_display =('OrderId','CustomerId','total')
+	
 
 
 admin.site.register(Company,CompanyAdmin)
