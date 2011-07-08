@@ -4,7 +4,7 @@ from django.contrib import admin
 
 class Company(models.Model):
 	name=models.CharField(max_length=60)
-	location=models.charField(max_length=100)
+	location=models.CharField(max_length=100)
 	phoneNumber=models.IntegerField()
 	def __unicode__(self):
 		return self.name+","+str(self.location)
