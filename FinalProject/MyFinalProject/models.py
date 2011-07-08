@@ -12,4 +12,7 @@ class Customer(models.Model):
 class Order(models.Model):
 	Quantity=models.IntegerField()
 	Item=models.CharField(max_length=20)
-        OrderId=models.IntegerField() 
+        OrderId=models.ForeignKey(Customer) 
+
+class CommentInline(admin.TabularInline):
+	model = Comment
