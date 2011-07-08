@@ -11,7 +11,7 @@ class MenuItem(models.Model):
 	number=models.IntegerField(max_length=10)
 	price=models.FloatField()
 	item=models.CharField(max_length=20)
-	company=models.ForeignKey(Company)
+	companyId=models.ForeignKey(Company)
 	def __unicode__(self):
 		return str(self.item)+","+str(self.price)
 
