@@ -12,7 +12,7 @@ class MenuItem(models.Model):
 	number=models.IntegerField(max_length=10)
 	price=models.FloatField()
 	item=models.CharField(max_length=20)
-	companyId=models.ForeignKey(Company)
+	company=models.ForeignKey(Company)
 	def __unicode__(self):
 		return str(self.item)+","+str(self.price)
 
@@ -30,7 +30,7 @@ class Payment(models.Model):
 class Order(models.Model):
 	quantity=models.IntegerField()
 	item=models.CharField(max_length=20)
-        orderId=models.ForeignKey(Customer) 
+        order=models.ForeignKey(Customer) 
 	def __unicode__(self):
 		return str(self.quantity)+","+self.item
 class History(models.Model):
