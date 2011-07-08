@@ -9,19 +9,19 @@ class Company(models.Model):
 	def __unicode__(self):
 		return self.name+","+str(self.location)
 class MenuItem(models.Model):
-	number=models.Integer(max_length=10)
-	price=models.FloatField(max_digits=10, decimal_places=2)
+	number=models.IntegerField(max_length=10)
+	price=models.FloatField()
 	item=models.CharField(max_length=20)
 	companyId=models.ForeignKey(Company)
 	def __unicode__(self):
 		return str(self.item)+","+str(self.price)
 
 class Customer(models.Model):
-	phonenumber=models.IntergerField()
+	phonenumber=models.IntegerField()
 	def __unicode__(self):
 		return str(self.phonenumber)
 class Payment(models.Model):
-	amount=models.FloatField(max_digits=10, decimal_places=3)
+	amount=models.FloatField()
 	confirmationMessage=models.CharField(max_length=60)
 	date=models.DateTimeField(auto_now=True)
 	def __unicode__(self):
@@ -36,7 +36,7 @@ class Order(models.Model):
 class History(models.Model):
 	OrderId =models.ForeignKey(Order)
 	CustomerId=models.ForeignKey(Customer)
-	total=models.FloatField(max_digits=10, decimal_places=2)
+	total=models.FloatField()
 	def __unicode__(self):
 		return str(self.total)
 
@@ -52,7 +52,7 @@ class HistoryInline(admin.TabularInline):
 class CompanyAdmin(admin.ModelAdmin):
 	list_display = ('name','location','phoneNumber')
 	search_fields = ('name',)
-	list_filter = ('date',)
+	list_filter = ('name',)
 	inlines = [MenuItemInline]
 
 class MenuItemAdmin(admin.ModelAdmin):
@@ -60,7 +60,7 @@ class MenuItemAdmin(admin.ModelAdmin):
 	list_filter = ('number','price')
 
 class CustomerAdmin(admin.ModelAdmin):
-	list_display('phonenumber')
+	list_display = ('phonenumber',)
 	inlines = [OrderInline]
 	inlines = [HistoryInline]
 	
