@@ -1,4 +1,3 @@
-
 from django.db import models
 from django.contrib import admin
 
@@ -46,7 +45,8 @@ class OrderInline(admin.TabularInline):
 	model = Order
 class HistoryInline(admin.TabularInline):
 	model=History
-
+class CustomerInline(admin.TabularInline):
+	model=Customer
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -63,10 +63,23 @@ class CustomerAdmin(admin.ModelAdmin):
 	list_display = ('phonenumber',)
 	inlines = [OrderInline]
 	inlines = [HistoryInline]
+
+class PaymentAdmin(admin.ModelAdmin):
+	list_display =('amount','confirmationMessage','date')
+	search_fields = ('date',)
 	
+class OrderAdmin(admin.ModelAdmin):
+	list_display = ('quantity','item')
+	search_fields = ('item',)
+
+class HistoryAdmin(admin.ModelAdmin):
+	list_display =('OrderId','CustomerId','total')
+	
+
+
 admin.site.register(Company,CompanyAdmin)
 admin.site.register(MenuItem,MenuItemAdmin)
 admin.site.register(Customer,CustomerAdmin)
-
-
-
+admin.site.register(Payment,PaymentAdmin)
+admin.site.register(Order,OrderAdmin)
+admin.site.register(History,HistoryAdmin)
