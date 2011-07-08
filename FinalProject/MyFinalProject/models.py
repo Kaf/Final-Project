@@ -7,7 +7,7 @@ class Company(models.Model):
 	location=models.charField(max_length=100)
 	phoneNumber=models.IntegerField()
 	def __unicode__(self):
-		return self.name)+","+self.location
+		return self.name)+","+str(self.location)
 class MenuItem(models.Model):
 	number=models.Integer(max_length=10)
 	price=models.FloatField(max_digits=10, decimal_places=2)
