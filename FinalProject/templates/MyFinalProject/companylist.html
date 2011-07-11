@@ -1,7 +1,9 @@
 {% extends "MyFinalProject/base.html" %}
 {% block content %}
 {% for comp in getCompany %}
-<ul>{{comp}}</ul>
+<ul>
+<a href="/MyFinalProject/menulist/{{comp.id}}">{{comp}}</a>
+</ul>
 {% endfor %}
 {% endblock %}
 

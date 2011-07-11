@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <form name="blah" method="post" action="/blah/display_viewnotsure">
 	Fried Rice: <input type="text" name="item_1" value="0">
 	{% for item in item_list %}
@@ -5,3 +6,11 @@
 	{% endfor %}
 	<input type="submit">
 </form>
+=======
+{% extends "MyFinalProject/base.html" %}
+{% block content %}
+ {% for menu in MenuItems%}
+<ul>{{menu.number}}{{menu}}</ul>
+ {% endfor%}
+{% endblock %}
+>>>>>>> c96575ffa7668f03e800a1bd6f4057b87d3a7e9a
