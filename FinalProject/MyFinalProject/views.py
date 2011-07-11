@@ -18,7 +18,7 @@ def home(request):
 	return HttpResponse(t.render(c))
 def menuView(request, id):
 	com=Company.objects.get(pk=id)
-	menuItems = com.MenuItem_set.all()
+	MenuItems = com.menuitem_set.all()
 	t = loader.get_template('MyFinalProject/menulist.html')
 	c = Context({'Company':Company,'com':com, 'MenuItems':MenuItems})
 	return HttpResponse(t.render(c))
