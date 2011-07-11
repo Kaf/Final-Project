@@ -28,7 +28,7 @@ def displayView(request):
 	return HttpResponse(t.render(c))
 def restaurantView(request,id):
 	order=Customer.objects.get(pk=id)
-	order=order.Order_set.all()
+	order=order.order_set.all()
 	t=loader.get_template('MyFinalProject/restaurant.html')
 	c=Context(dict())
 	return HttpResponse(t.render(c))
