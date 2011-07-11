@@ -8,5 +8,6 @@ url(r'^restaurant/(?P<id>\d+)$', 'MyFinalProject.views.restaurantView'),
 url(r'^company/$', 'MyFinalProject.views.listView'),
 url(r'^confirm$', 'MyFinalProject.views.displayView'),
 #url(r'^$', 'MyFinalProject.views.'),
+#url(r'^$', 'MyFinalProject.views.'),
 )
 
