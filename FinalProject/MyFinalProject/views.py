@@ -9,7 +9,7 @@ from models import Company, MenuItem,Customer,Payment,Order,History
 
 def listView(request):
 	getCompany=Company.objects.all()
-	t = loader.get_template('MyFinalProject/list.html')
+	t = loader.get_template('MyFinalProject/companylist.html')
 	c = Context({'getCompany':getCompany})
 	return HttpResponse(t.render(c))
 def home(request):
@@ -18,9 +18,10 @@ def home(request):
 	return HttpResponse(t.render(c))
 def menuView(request, id):
 	com=Company.objects.get(pk=id)
-	menuItems = com.MenuItem_set.all()
-	t = loader.get_template('MyFinalProject/menu.html')
-	c = Context({'Company':Company,'com':com, 'MenuItems':MenuItems})
+	menuItems = com#.MenuItem_set.all()
+	t = loader.get_template('MyFinalProject/menulist.html')
+	c = Context({'Company':Company,'com':com#, 'MenuItems':MenuItems
+	})
 	return HttpResponse(t.render(c))
 def displayView(request):
 	t=loader.get_template('MyFinalProject/display.html')

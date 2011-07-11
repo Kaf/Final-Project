@@ -37,6 +37,7 @@ class History(models.Model):
 	OrderId =models.ForeignKey(Order)
 	CustomerId=models.ForeignKey(Customer)
 	total=models.FloatField()
+	ispaid=models.BooleanField()
 	def __unicode__(self):
 		return str(self.total)
 
