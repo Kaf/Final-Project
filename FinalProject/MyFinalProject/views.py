@@ -16,19 +16,29 @@ def home(request):
 	t = loader.get_template('MyFinalProject/base.html')
 	c = Context(dict())
 	return HttpResponse(t.render(c))
+def sumPrices(d):
+	
 def menuView(request, id):
 	com=Company.objects.get(pk=id)
-	MenuItems = com.menuitem_set.all()
+	menuItems = com.menuitem_set.all()
+	for item in menuItems:
+		print items.price
+	print com,menuItems
+	print type (com)
+	print type(menuItems)
+	menu = MenuItem.objects.get(pk=price)
+	if request.method == 'POST':
+			return HttpResponseRedirect(request.path)
 	t = loader.get_template('MyFinalProject/menulist.html')
-	c = Context({'Company':Company,'com':com, 'MenuItems':MenuItems})
-	return HttpResponse(t.render(c))
+	c = Context({'Company':Company,'com':com, 'menuItems':menuItems})
+	return HttpResponse(t.render(c))'''
 def displayView(request):
 	t=loader.get_template('MyFinalProject/confirm.html')
 	c=Context(dict())
 	return HttpResponse(t.render(c))
 def restaurantView(request,id):
 	order=Customer.objects.get(pk=id)
-	order=order.Order_set.all()
+	order=order.order_set.all()
 	t=loader.get_template('MyFinalProject/restaurant.html')
 	c=Context(dict())
 	return HttpResponse(t.render(c))
