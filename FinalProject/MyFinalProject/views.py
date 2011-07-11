@@ -6,6 +6,7 @@ from django.template import Context, loader
 from django.http import HttpResponse,HttpResponseRedirect
 from models import Company, MenuItem,Customer,Payment,Order,History
 
+
 def listView(request):
 	getCompany=Company.objects.all()
 	t = loader.get_template('MyFinalProject/list.html')
@@ -25,7 +26,9 @@ def displayView(request):
 	t=loader.get_template('MyFinalProject/display.html')
 	c=Context(dict())
 	return HttpResponse(t.render(c))
-def restaurantView(request):
+def restaurantView(request,id):
+	ord=Customer.objects.get(pk=id)
+	order=ord.Order_set.all()
 	t=loader.get_template('MyFinalProject/restaurant.html')
 	c=Context(dict())
 	return HttpResponse(t.render(c))
