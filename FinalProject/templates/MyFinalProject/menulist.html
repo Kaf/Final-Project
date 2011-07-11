@@ -1,6 +1,8 @@
 {% extends "MyFinalProject/base.html" %}
 {% block content %}
+ <h1>{{com}}</h1>
  {% for menu in MenuItems%}
-<ul>{{menu}}</ul>
+ <ul>{{menu}}</ul>
  {% endfor%}
+<a href="/MyFinalProject/company">Back</a>
 {% endblock %}
