@@ -1,4 +1,5 @@
 {% extends "MyFinalProject/base.html" %}
+{% comment %}
 {% block content %}
  <h1>{{com}}</h1>
  {% for menu in MenuItems%}
@@ -6,3 +7,15 @@
  {% endfor%}
 <a href="/MyFinalProject/company">Back</a>
 {% endblock %}
+{% endcomment %}
+
+{% block content %}
+<form name="Menu" method="post" action="/MyFinalProject/company">
+	{% for menu in MenuItems %}
+		<ul>{{menu}}</ul>: <input type="checkbox" name="menu" value="0">
+	{% endfor %}
+<input type="submit">
+</form>
+{% endblock %}
+
+	
