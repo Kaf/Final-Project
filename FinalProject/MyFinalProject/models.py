@@ -15,7 +15,7 @@ class MenuItem(models.Model):
 	name = models.CharField(max_length=100)
 	company = models.ForeignKey(Company)
 	def __unicode__(self):
-		return str(self.number)+" "+str(self.name)+" "+str(self.price)
+		return str(self.company)+': '+str(self.number)+" "+str(self.name)+" "+str(self.price)
 
 class History(models.Model):
 	total=models.FloatField()
