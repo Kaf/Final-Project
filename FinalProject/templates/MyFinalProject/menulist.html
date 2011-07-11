@@ -2,7 +2,7 @@
 {% comment %}
 {% block content %}
  <h1>{{com}}</h1>
- {% for menu in MenuItems%}
+ {% for menu in menuItems%}
  <ul>{{menu}}</ul>
  {% endfor%}
 <a href="/MyFinalProject/company">Back</a>
@@ -11,9 +11,10 @@
 
 {% block content %}
 <form name="Menu" method="post" action="/MyFinalProject/company">
-	{% for menu in MenuItems %}
-		<ul>{{menu}}</ul>: <input type="checkbox" name="menu" value="0">
+	{% for item in menuItems %}
+		<ul>{{item}}: <input type="text" name="item{{item.id}}" value="0"> </ul>
 	{% endfor %}
+
 <input type="submit">
 </form>
 {% endblock %}
