@@ -14,7 +14,7 @@ class MenuItem(models.Model):
 	item=models.CharField(max_length=100)
 	companyId=models.ForeignKey(Company)
 	def __unicode__(self):
-		return str(self.number)+" : "+str(self.item)+" "+"GHC "+str(self.price)
+		return str(self.number)+". "+str(self.item)+" : "+"GHC "+str(self.price)
 
 class Customer(models.Model):
 	phonenumber=models.IntegerField()
