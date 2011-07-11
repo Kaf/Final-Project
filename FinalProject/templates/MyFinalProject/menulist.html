@@ -1,0 +1,7 @@
+<form name="blah" method="post" action="/blah/display_viewnotsure">
+	Fried Rice: <input type="text" name="item_1" value="0">
+	{% for item in item_list %}
+		{{item.item}}: <input type="text" name="item_{{item.number}}" value="0">
+	{% endfor %}
+	<input type="submit">
+</form>
