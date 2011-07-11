@@ -30,7 +30,7 @@ class Payment(models.Model):
 class Order(models.Model):
 	quantity=models.IntegerField()
 	item=models.CharField(max_length=20)
-        order=models.ForeignKey(Customer) 
+        OrderId=models.ForeignKey(Customer) 
 	def __unicode__(self):
 		return str(self.quantity)+","+self.item
 class History(models.Model):
@@ -42,6 +42,7 @@ class History(models.Model):
 
 class MenuItemInline(admin.TabularInline):
 	model = MenuItem
+	extra = 5
 class OrderInline(admin.TabularInline):
 	model = Order
 class HistoryInline(admin.TabularInline):
@@ -63,10 +64,22 @@ class CustomerAdmin(admin.ModelAdmin):
 	list_display = ('phonenumber',)
 	inlines = [OrderInline]
 	inlines = [HistoryInline]
+
+class OrderAdmin(admin.ModelAdmin):
+	list_display = ('OrderId','quantity','item')
+
+class HistoryAdmin(admin.ModelAdmin):
+	list_display = ('CustomerId','total')
+
+class PaymentAdmin(admin.ModelAdmin):
+	list_display = ('amount','date')
+	search_fields = ('date',)
+
 	
 admin.site.register(Company,CompanyAdmin)
 admin.site.register(MenuItem,MenuItemAdmin)
 admin.site.register(Customer,CustomerAdmin)
-
-
+admin.site.register(Order,OrderAdmin)
+admin.site.register(Payment,PaymentAdmin)
+admin.site.register(History,HistoryAdmin)
 
