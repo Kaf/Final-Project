@@ -13,7 +13,7 @@ def listView(request):
 	c = Context({'getCompany':getCompany})
 	return HttpResponse(t.render(c))
 def home(request):
-	t = loader.get_template('MyFinalProject/home.html')
+	t = loader.get_template('MyFinalProject/base.html')
 	c = Context(dict())
 	return HttpResponse(t.render(c))
 def menuView(request, id):
