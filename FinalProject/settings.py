@@ -1,4 +1,6 @@
 # Django settings for FinalProject project.
+import os
+PWD = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -106,7 +108,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-     "/home/kafu/Desktop/Final-Project/FinalProject/templates"
+    os.path.join(PWD, "templates")
 )
 
 INSTALLED_APPS = (
@@ -115,7 +117,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+#    'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'MyFinalProject',
     'django.contrib.admin',
