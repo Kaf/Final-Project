@@ -42,18 +42,20 @@ def menuView(request, id):
 			#return HttpResponseRedirect(request.path) 
 	
 	t = loader.get_template('MyFinalProject/menulist.html')
-	c = Context({'Company':Company,'com':com, 'menuItems':menuItems, 'total':total})
+	c = Context({'Company':Company,'com':com, 'menuItems':menuItems})
 	return HttpResponse(t.render(c))
 
+
+@csrf_exempt
 def displayView(request):
+	total=sumPrices(request.POST)
 	t=loader.get_template('MyFinalProject/confirm.html')
-	c=Context(dict())
+	c=Context({'total':total})
 	return HttpResponse(t.render(c))
 
 def restaurantView(request,id):
 	order=Customer.objects.get(pk=id)
 	order=order.order_set.all()
-	tel = order.phonenumber
 	t=loader.get_template('MyFinalProject/restaurant.html')
 	c=Context(dict())
 	return HttpResponse(t.render(c))

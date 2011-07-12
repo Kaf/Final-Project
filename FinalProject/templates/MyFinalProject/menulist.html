@@ -13,7 +13,7 @@
 {% endcomment %}
 
 {% block content %}
-<form name="Menu" method="post" action="./1">
+<form name="Menu" method="post" action="/MyFinalProject/confirm">
 	{% for item in menuItems %}
 		<ul>{{item}}: <input type="text" name="item{{item.id}}" value="0"> </ul>
 	{% endfor %}
