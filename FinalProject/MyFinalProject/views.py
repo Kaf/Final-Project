@@ -17,21 +17,32 @@ def home(request):
 	c = Context(dict())
 	return HttpResponse(t.render(c))
 def sumPrices(d):
-	
+	total=0
+	for k,v in d.iteritems(): 
+		if k[:4]== 'item': 
+			itemid=int(k[4:])
+			price=MenuItem.objects.get(id=itemid).price
+			print price,v
+			total+=price*int(v)
+	print total
+	return total
+
+@csrf_exempt
 def menuView(request, id):
 	com=Company.objects.get(pk=id)
 	menuItems = com.menuitem_set.all()
-	for item in menuItems:
-		print items.price
-	print com,menuItems
-	print type (com)
+	#for item in menuItems:
+	#	print item.price
+	print menuItems
+	#print type (com)
 	print type(menuItems)
-	menu = MenuItem.objects.get(pk=price)
-	if request.method == 'POST':
-			return HttpResponseRedirect(request.path)
+	sumPrices(request.POST)
+	#menu = MenuItem.objects.get(pk=price)
+			#return HttpResponseRedirect(request.path) 
+	
 	t = loader.get_template('MyFinalProject/menulist.html')
 	c = Context({'Company':Company,'com':com, 'menuItems':menuItems})
-	return HttpResponse(t.render(c))'''
+	return HttpResponse(t.render(c))
 def displayView(request):
 	t=loader.get_template('MyFinalProject/confirm.html')
 	c=Context(dict())
