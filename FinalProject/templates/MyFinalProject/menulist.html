@@ -13,11 +13,11 @@
 {% endcomment %}
 
 {% block content %}
-<h1>{{com}}</h1>
-<form name="Menu" method="post" action="/MyFinalProject/confirm">
+<form name="Menu" method="post" action="./1">
 	{% for item in menuItems %}
-		<ul>{{item}}: <input type="item{{item.price}}" name="item{{item.id}}" value="0"> </ul>
+		<ul>{{item}}: <input type="text" name="item{{item.id}}" value="0"> </ul>
 	{% endfor %}
+Your total amount is {{total}}
 <input type="submit">
 </form>
 {% endblock %}
