@@ -15,7 +15,7 @@ class MenuItem(models.Model):
 	name = models.CharField(max_length=100)
 	company = models.ForeignKey(Company)
 	def __unicode__(self):
-		return str(self.company)+': '+str(self.number)+" "+str(self.name)+" "+str(self.price)
+		return str(self.number)+" "+str(self.name)+" "+str(self.price)
 
 class History(models.Model):
 	total=models.FloatField()
@@ -36,13 +36,19 @@ class Payment(models.Model):
 	def __unicode__(self):
 		return str(self.amount)+","+str(self.date)
 
+Quant = (
+('1','1'),('5','4'),)
+
 class Order(models.Model):
-	quantity = models.IntegerField()
+	quantity = models.IntegerField(choices=Quant)
 	menuitem = models.ForeignKey(MenuItem)
-        customer = models.ForeignKey(Customer) 
-	
+        customer = models.ForeignKey(Customer)
+	company = models.ForeignKey(Company) 
 	def __unicode__(self):
 		return str(self.quantity)+","+str(self.menuitem)
+
+
+
 
 
 class MenuItemInline(admin.TabularInline):
@@ -71,7 +77,8 @@ class CustomerAdmin(admin.ModelAdmin):
 #	inlines = [HistoryInline]
 
 class OrderAdmin(admin.ModelAdmin):
-	list_display = ('menuitem','quantity','customer')
+	list_display = ('company','menuitem','quantity','customer')
+	fk_name = ('menuitem')
 
 #class NumberOfItemAdmin(admin.ModelAdmin):
 #	list_display = ('num',)
