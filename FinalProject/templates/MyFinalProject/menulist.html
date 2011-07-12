@@ -1,7 +1,10 @@
 {% extends "MyFinalProject/base.html" %}
 {% comment %}
 {% block content %}
- <h1>{{com}}</h1>
+<h1>{{com}}</h1>
+{% for c in od %}
+<h1>quantity: {{c.quantity}}</h1>
+{% endfor %}
  {% for menu in menuItems%}
  <ul>{{menu}}</ul>
  {% endfor%}
@@ -10,11 +13,11 @@
 {% endcomment %}
 
 {% block content %}
-<form name="Menu" method="post" action="/MyFinalProject/company">
+<h1>{{com}}</h1>
+<form name="Menu" method="post" action="/MyFinalProject/confirm">
 	{% for item in menuItems %}
-		<ul>{{item}}: <input type="text" name="item{{item.id}}" value="0"> </ul>
+		<ul>{{item}}: <input type="item{{item.price}}" name="item{{item.id}}" value="0"> </ul>
 	{% endfor %}
-
 <input type="submit">
 </form>
 {% endblock %}
