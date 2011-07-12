@@ -89,7 +89,7 @@ class OrderAdmin(admin.ModelAdmin):
 class PaymentAdmin(admin.ModelAdmin):
 	list_display = ('amount','date')
 	search_fields = ('date',)
-
+347
 	
 admin.site.register(Company,CompanyAdmin)
 admin.site.register(MenuItem,MenuItemAdmin)
