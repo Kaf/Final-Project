@@ -37,12 +37,12 @@ def menuView(request, id):
 	print menuItems
 	#print type (com)
 	print type(menuItems)
-	sumPrices(request.POST)
+	total = sumPrices(request.POST)
 	#menu = MenuItem.objects.get(pk=price)
 			#return HttpResponseRedirect(request.path) 
 	
 	t = loader.get_template('MyFinalProject/menulist.html')
-	c = Context({'Company':Company,'com':com, 'menuItems':menuItems})
+	c = Context({'Company':Company,'com':com, 'menuItems':menuItems, 'total':total})
 	return HttpResponse(t.render(c))
 
 def displayView(request):
@@ -53,6 +53,7 @@ def displayView(request):
 def restaurantView(request,id):
 	order=Customer.objects.get(pk=id)
 	order=order.order_set.all()
+	tel = order.phonenumber
 	t=loader.get_template('MyFinalProject/restaurant.html')
 	c=Context(dict())
 	return HttpResponse(t.render(c))
