@@ -17,15 +17,20 @@ def home(request):
 	c = Context(dict())
 	return HttpResponse(t.render(c))
 def sumPrices(d):
-	total=0
+	tot=0
+        total=0
+	telNumber = ' '
 	for k,v in d.iteritems(): 
 		if k[:4]== 'item': 
 			itemid=int(k[4:])
 			price=MenuItem.objects.get(id=itemid).price
 			print price,v
-			total+=price*int(v)
-	print total
-	return total
+			tot+=price*int(v)		
+		if k[:3]=='tel':
+			telNumber+=v
+        total+=(tot*0.05)+tot		
+	print tot,total,telNumber
+	return total,telNumber
 
 @csrf_exempt
 def menuView(request, id):
@@ -45,7 +50,10 @@ def menuView(request, id):
 	return HttpResponse(t.render(c))
 @csrf_exempt
 def displayView(request):
-	total=sumPrices(request.POST)
+	totalList=sumPrices(request.POST)
+	total = totalList[0]
+	telNum = totalList[1]
+	print telNum
 	t=loader.get_template('MyFinalProject/confirm.html')
 	c=Context({'total':total})
 	return HttpResponse(t.render(c))
