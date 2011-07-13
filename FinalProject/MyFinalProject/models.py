@@ -38,7 +38,8 @@ class Payment(models.Model):
 		return str(self.amount)+","+str(self.date)
 
 class OrderItem(models.Model):
-	quantity= models.IntegerField() 
+	Quant = (('1','1'),('2','2'))
+	quantity= models.IntegerField(choices = Quant) 
 	menuitem = models.ForeignKey(MenuItem)
 	order = models.ForeignKey(Order)
 	
