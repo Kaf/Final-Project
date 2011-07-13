@@ -17,22 +17,37 @@ def home(request):
 	c = Context(dict())
 	return HttpResponse(t.render(c))
 
-def sumPrices(d):
+
+#Create neworder
+#totalprice=0
+#for each posted menuitem where qty>0:
+#	create orderitem
+#	get price of menuitem
+ #       totalprice = totalprice + qty*menuitemprice
+#end for
+#neworder.price = totalprice
+#neworder.save
+	
+'''def sumPrices(d):
 	tot=0
         total=0
 	telNumber = ' '
+	orderedfood= ' '
 	for k,v in d.iteritems(): 
 		if k[:4]== 'item': 
 			itemid=int(k[4:])
 			price=MenuItem.objects.get(id=itemid).price
+			 
 			print price,v
-			tot+=price*int(v)		
+			tot+=price*int(v)
+			if int(v) !=0:
+				orderedfood += 	str(MenuItem.objects.get(id=itemid).number)+" "+str(MenuItem.objects.get(id=itemid).name)+" " + v +"\n"	
 		if k[:3]=='tel':
 			telNumber+=v
         total+=(tot*0.05)+tot		
 	print tot,total,telNumber
-	return total,telNumber
-'''
+	return total,telNumber,orderedfood '''
+
 @csrf_exempt
 def menuView(request, id):
 	com=Company.objects.get(pk=id)
@@ -42,23 +57,40 @@ def menuView(request, id):
 	print menuItems
 	#print type (com)
 	print type(menuItems)
-	total = sumPrices(request.POST)
 	#menu = MenuItem.objects.get(pk=price)
 			#return HttpResponseRedirect(request.path) 
 	
 	t = loader.get_template('MyFinalProject/menulist.html')
 	c = Context({'Company':Company,'com':com, 'menuItems':menuItems})
 	return HttpResponse(t.render(c))
-'''
 
+#Create neworder
+#totalprice=0
+#for each postvariable:
+#	if contains "item" and qty>0
+#		get menuitem
+#		create orderitem
+#		get price of menuitem
+ #       	totalprice = totalprice + qty*menuitemprice
+#end for
+#neworder.price = totalprice
+#neworder.save
 @csrf_exempt
 def displayView(request):
-	totalList=sumPrices(request.POST)
-	total = totalList[0]
-	telNum = totalList[1]
-	print telNum
+	newOrder = Order.objects.create(phonenumber=request.POST['tel'])
+	totalprice = 0
+	print request.POST
+	for k,v in request.POST.iteritems():
+		if k[:4]== 'item' and int(v)>0: 
+			itemid=int(k[4:])
+			mi=MenuItem.objects.get(id=itemid)
+			newOrderItem = OrderItem.objects.create(order=newOrder, menuitem=mi, quantity=int(v))
+                	totalprice += int(v)*mi.price
+	#newOrderItem = OrderItem.objects.create(order=newOrder, menuItem=mi)
+	newOrder.total=totalprice
+	newOrder.save()
 	t=loader.get_template('MyFinalProject/confirm.html')
-	c=Context({'total':total})
+	c=Context({'totalprice':totalprice})
 	return HttpResponse(t.render(c))
 
 
@@ -66,54 +98,35 @@ def displayView(request):
 def restaurantView(request,order_id):
 	#order=order.order_set.all().filter()
 	#print order
-	order = Order.objects.get(pk=order_id)
+	order = Order.objects.all()
+	t = loader.get_template('MyFinalProject/restaurant.html')
+	c = Context({'order':order})
+	return HttpResponse(t.render(c))
 	#customer=Customer.objects.get(order.customer)
 	#telNumber = customer.phonenumber	
-	t=loader.get_template('MyFinalProject/restaurant.html')
-	c=Context({'telNumber':telNumber})
-	return HttpResponse(t.render(c))
 
 
-class OrderForm(ModelForm):
+
+'''
+class MenuForm(ModelForm):
     class Meta:
-	exclude=['ispaid']
-	model = Order
-	
-
-
-
-#class OrderItemForm(ModelForm):
- #   class Meta:
-#	exclude=['menitem']
-#	model = OrderItem
-
+	exclude=['company']
+	model = MenuItem
 	
 def menuView(request, id):
 	com=Company.objects.get(pk=id)
 	menuItems = com.menuitem_set.all()
-	#orderitem = OrderItem.objects.select_related().get(id=phonenumber)
-	#quant = orderitem.quantity
 	#menu = menuItems.objects.get(pk=id)
-	for e in OrderItem.objects.all():
-    		print e.quantity
 	if request.method == 'POST':
-		form = OrderForm(request.POST)
-		#form1 = OrderItemForm(request.POST)
-		if form.is_valid() and form1.is_valid():
-			form.save()
-		#	form1.save()
-			#m = menuItems.objects.filter(name__icontains=request.POST['price'])
-			print menuItems
+		form = MenuForm(request.POST)
+		if form.is_valid():
+			m = MenuItem.objects.filter(name__icontains=request.POST['price'])
 			return HttpResponseRedirect(request.path)
 	else:
-        	form = OrderForm()
-		#form1 = OrderItemForm
-		
+        	form = MenuForm()
 	t = loader.get_template('MyFinalProject/menulist.html')
-	c = Context({'Company':Company,'form':form.as_p(),#'quant':quant,#'form1':form1.as_p(),
-	'com':com,'menuItems':menuItems})
+	c = Context({'Company':Company,'form':form.as_p(),'com':com, 'menuItems':menuItems})
 	return HttpResponse(t.render(c))
-'''
 def getphonenum(d):
 	telNumber = ' '
 	for k,v in d.iteritems(): 

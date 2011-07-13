@@ -1,9 +1,9 @@
 {% extends "MyFinalProject/base.html" %}
 {% block content %}
-<h1>Company List</h1>
+<h1><font  color="red">Company List</font><hr></h1>
 {% for comp in getCompany %}
 <ul>
-<a href="/MyFinalProject/menulist/{{comp.id}}">{{comp}}</a>
+<a href="/MyFinalProject/menulist/{{comp.id}}"><font size="4" color="green">{{comp}}</font></a>
 </ul>
 {% endfor %}
 {% endblock %}

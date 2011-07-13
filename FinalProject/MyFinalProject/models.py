@@ -14,7 +14,7 @@ class MenuItem(models.Model):
 	name = models.CharField(max_length=100)
 	company = models.ForeignKey(Company)
 	def __unicode__(self):
-		return str(self.company)+': '+str(self.number)+" "+str(self.name)+" "+str(self.price)
+		return str(self.company)+':   '+str(self.number)+"   "+str(self.name)+"    "+str(self.price)
 
 #class Customer(models.Model):
 #	phonenumber=models.IntegerField()
@@ -22,12 +22,15 @@ class MenuItem(models.Model):
 #	def __unicode__(self):
 #		return str(self.phonenumber)
 
+
 class Order(models.Model):
-	total=models.FloatField()
-	ispaid=models.BooleanField()
-	phonenumber = models.IntegerField()
+	total=models.FloatField(blank=True,null=True)
+	ispaid =  models.BooleanField()
+	phonenumber = models.IntegerField(blank=True,null=True)
+	placedorder = models.TextField()
+	created     =  models.DateTimeField(auto_now=True)
 	def __unicode__(self):
-		return str(self.phonenumber)+"," + str(self.total)
+		return str(self.total)+"  "+ str(self.phonenumber)
 
 
 class Payment(models.Model):
@@ -74,6 +77,7 @@ class MenuItemAdmin(admin.ModelAdmin):
 
 class OrderAdmin(admin.ModelAdmin):
 	#list_display = ('menuitem','quantity','customer')
+	list_filter = ('created',)
 	inlines = [OrderItemInline]
 	list_display = ('phonenumber','total','ispaid')
 
