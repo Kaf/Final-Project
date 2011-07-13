@@ -12,10 +12,11 @@
 {% block content %}
 <form name="Menu" method="post" action="/MyFinalProject/confirm">
 	{% for item in menuItems %}
-		<ul>{{item}}: <input type="text" name="item{{item.id}}" value="0"> </ul>
+		<ul><font color="blue">{{item}}</font> :<input type="text" name="item{{item.id}}" value="0"> </ul>
 	{% endfor %}
-	<ul>telephone Number: <input type="text" name="tel" value="0"> </ul>
-<input type="submit">
+	<ul><font color="blue">telephone Number:</font> <input type="text" name="tel" value="0"> </ul>
+
+<pre><input type="submit"></pre>
 </form>
 {% endblock %}
 
