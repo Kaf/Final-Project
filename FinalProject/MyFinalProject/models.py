@@ -1,4 +1,3 @@
-
 from django.db import models
 from django.contrib import admin
 
@@ -22,6 +21,7 @@ class MenuItem(models.Model):
 #	#history = models.ForeignKey(History)
 #	def __unicode__(self):
 #		return str(self.phonenumber)
+
 
 class Order(models.Model):
 	total=models.FloatField(blank=True,null=True)
@@ -78,6 +78,7 @@ class OrderAdmin(admin.ModelAdmin):
 	#list_display = ('menuitem','quantity','customer')
 	list_filter = ('created',)
 	inlines = [OrderItemInline]
+	list_display = ('phonenumber','total','ispaid')
 
 
 #class NumberOfItemAdmin(admin.ModelAdmin):
