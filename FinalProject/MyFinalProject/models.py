@@ -1,4 +1,3 @@
-
 from django.db import models
 from django.contrib import admin
 
@@ -15,19 +14,21 @@ class MenuItem(models.Model):
 	name = models.CharField(max_length=100)
 	company = models.ForeignKey(Company)
 	def __unicode__(self):
-		return str(self.number)+" "+str(self.name)+" "+str(self.price)
+		return str(self.company)+': '+str(self.number)+" "+str(self.name)+" "+str(self.price)
 
-class History(models.Model):
+#class Customer(models.Model):
+#	phonenumber=models.IntegerField()
+#	#history = models.ForeignKey(History)
+#	def __unicode__(self):
+#		return str(self.phonenumber)
+
+class Order(models.Model):
 	total=models.FloatField()
 	ispaid=models.BooleanField()
+	phonenumber = models.IntegerField()
 	def __unicode__(self):
-		return str(self.total)
+		return str(self.phonenumber)+"," + str(self.total)
 
-class Customer(models.Model):
-	phonenumber=models.IntegerField()
-	#history = models.ForeignKey(History)
-	def __unicode__(self):
-		return str(self.phonenumber)
 
 class Payment(models.Model):
 	amount=models.FloatField()
@@ -36,26 +37,20 @@ class Payment(models.Model):
 	def __unicode__(self):
 		return str(self.amount)+","+str(self.date)
 
-Quant = (
-('1','1'),('5','4'),)
-
-class Order(models.Model):
-	quantity = models.IntegerField(choices=Quant)
+class OrderItem(models.Model):
+	quantity= models.IntegerField() 
 	menuitem = models.ForeignKey(MenuItem)
-        customer = models.ForeignKey(Customer)
-	company = models.ForeignKey(Company) 
+	order = models.ForeignKey(Order)
+	
 	def __unicode__(self):
 		return str(self.quantity)+","+str(self.menuitem)
-
-
-
 
 
 class MenuItemInline(admin.TabularInline):
 	model = MenuItem
 	extra = 5
-class OrderInline(admin.TabularInline):
-	model = Order
+class OrderItemInline(admin.TabularInline):
+	model = OrderItem
 #class HistoryInline(admin.TabularInline):
 #	model=History
 
@@ -71,14 +66,16 @@ class MenuItemAdmin(admin.ModelAdmin):
 	list_display=('number','price','name','company')
 	list_filter = ('number','price')
 
-class CustomerAdmin(admin.ModelAdmin):
-	list_display = ('phonenumber',)
-	inlines = [OrderInline]
+#class CustomerAdmin(admin.ModelAdmin):
+#	list_display = ('phonenumber',)
+#	inlines = [OrderItemInline]
 #	inlines = [HistoryInline]
 
 class OrderAdmin(admin.ModelAdmin):
-	list_display = ('company','menuitem','quantity','customer')
-	fk_name = ('menuitem')
+	#list_display = ('menuitem','quantity','customer')
+	inlines = [OrderItemInline]
+	list_display = ('phonenumber','total','ispaid')
+
 
 #class NumberOfItemAdmin(admin.ModelAdmin):
 #	list_display = ('num',)
@@ -89,11 +86,11 @@ class OrderAdmin(admin.ModelAdmin):
 class PaymentAdmin(admin.ModelAdmin):
 	list_display = ('amount','date')
 	search_fields = ('date',)
-347
+
 	
 admin.site.register(Company,CompanyAdmin)
 admin.site.register(MenuItem,MenuItemAdmin)
-admin.site.register(Customer,CustomerAdmin)
+#admin.site.register(Customer,CustomerAdmin)
 admin.site.register(Order,OrderAdmin)
 admin.site.register(Payment,PaymentAdmin)
 #admin.site.register(History)#,HistoryAdmin)
