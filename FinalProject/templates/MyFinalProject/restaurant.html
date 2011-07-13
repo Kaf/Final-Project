@@ -1,0 +1,12 @@
+{% extends "MyFinalProject/base.html" %}
+{% block content %}
+
+{% for quantity in order %}
+	<p>The customer with telephone number {{quantity.phonenumber}} has ordered for the following menu items:</p>
+	<ul>
+	    <div>{{ quantity.placedorder }}</div></br>
+	   <div>Amount :{{ quantity.total }}</div>
+           <div>Date :{{ quantity.created }}</div>
+	</ul>
+{% endfor %}
+{% endblock %}
