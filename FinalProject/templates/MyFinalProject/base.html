@@ -29,10 +29,91 @@
 	    text-align: center;
 	    text-shadow: 0 -1px 1px #000000;
 	}
+
+
+
+
+a {
+    color: #3399CC;
+}
+ul.navigation li {
+    font-size: 1em;
+}
+ul li {
+    font-size: 0.8125em;
+}
+ul.navigation {
+    list-style: none outside none;
+}
+ul {
+    list-style: none outside none;
+}
+
+ul.navigation li {
+    border-bottom: 1px solid #B8DBED;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+ul li {
+    font-size: 0.8125em;
+    margin: 0;
+    padding: 0;
+}
+ul.navigation {
+    list-style: none outside none;
+}
+
+ul.navigation {
+    clear: both;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style: none outside none;
+    margin: 0px;
+    padding: 0;
+}
+
+
+
+
+#mobile_toolbar_pos_link, #mobile_toolbar_home_link, .backButton, div.bookingBackButton {
+    background: url("http://a2.cdn-hotels.com/images/116048/iphone/sprite_icons.png") no-repeat scroll 0 0 transparent;
+    color: white;
+    display: block;
+    font-size: 0.75em;
+    font-weight: bold;
+    height: 28px;
+    line-height: 30px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 0 3px #666666;
+    top: 7px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+
+#mobile_toolbar_home_link {
+    background-position: -200px -50px;
+    right: 9px;
+    width: 68px;
+}
+
+
+
+
+
+
 	</style>
     </head>
     <body>
-	<h1>{% block title %}MENU{% endblock%}</h1>
+	<div id="header"><a href="/MyFinalProject/company" id="mobile_toolbar_home_link">
+      Home</a><h1>{% block title %}MENU{% endblock%}</h1><span class="icon arrow_right"></span></div>
+	</ul>
         <div id="content">
 
         {% block content %}
