@@ -1,35 +1,38 @@
 {% extends "MyFinalProject/base.html" %}
-
 {% block content %}
-{% for item in menuItems %}
-	{{item}}{{quant}}</br>
-{% endfor %}
-<form method='post' action="">
-{{ form }}
-<input type='submit' name='Submit'>
-</form>
-<a href="/MyFinalProject/company">Back</a>
-{% endblock %}
+
+<style type="text/css">
+.item {
+float: left;
+}
+.dropdown {
+clear: right;
+float: right;
+}
+</style>
 
 
 
 
 
-
-{% comment %}
-{{form1}}
-{% block content %}
 <form name="Menu" method="post" action="/MyFinalProject/confirm">
-	{% for item in menuItems %}
-		<ul><font color="blue">{{item}}</font> :<input type="text" name="item{{item.id}}" value="0"> </ul>
-	{% endfor %}
-	<ul><font color="blue">telephone Number:</font> <input type="text" name="tel" value="0"> </ul>
-
-<pre><input type="submit"></pre>
-</form>
-<form name="" method="" action="./1">
-Your total amount is <input type="text" name="" value="{{total}}"></br>
+	<table>
+		{% for item in menuItems %}
+			<tr><td>{{item.name}}</td><td>GHC {{item.price}}</td>
+				<td>
+				<select class="dropdown" name="item{{item.id}}">
+				<option value="0" default>0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				</select> 
+				</td>
+			</tr>
+		{% endfor %}
+		<tr><td colspan="3">Phone Number:<input type="text" name="tel" size="10"></td></tr>
+	</table>
+<input type="submit" value="Order">
 </form>
 {% endblock %}
-{% endcomment %}
+
 
