@@ -79,6 +79,7 @@ def menuView(request, id):
 def displayView(request):
 	newOrder = Order.objects.create(phonenumber=request.POST['tel'])
 	totalprice = 0
+	orderedfood= ' '
 	print request.POST
 	for k,v in request.POST.iteritems():
 		if k[:4]== 'item' and int(v)>0: 
@@ -86,8 +87,10 @@ def displayView(request):
 			mi=MenuItem.objects.get(id=itemid)
 			newOrderItem = OrderItem.objects.create(order=newOrder, menuitem=mi, quantity=int(v))
                 	totalprice += int(v)*mi.price
+			orderedfood += 	"menu number:  "+str(MenuItem.objects.get(id=itemid).number)+"    "+ "item Name   :"+  str(MenuItem.objects.get(id=itemid).name)+"   " +" Price   " + v +"\n"	
 	#newOrderItem = OrderItem.objects.create(order=newOrder, menuItem=mi)
 	newOrder.total=totalprice
+	newOrder.placedorder = orderedfood
 	newOrder.save()
 	t=loader.get_template('MyFinalProject/confirm.html')
 	c=Context({'totalprice':totalprice})
@@ -95,10 +98,11 @@ def displayView(request):
 
 
 
-def restaurantView(request,order_id):
+def restaurantView(request):
 	#order=order.order_set.all().filter()
 	#print order
 	order = Order.objects.all()
+	print order
 	t = loader.get_template('MyFinalProject/restaurant.html')
 	c = Context({'order':order})
 	return HttpResponse(t.render(c))
