@@ -1,12 +1,77 @@
 {% extends "MyFinalProject/base.html" %}
 {% block content %}
-<h1><font  color="red">Company List</font><hr></h1>
-{% for comp in getCompany %}
-<ul>
-<a href="/MyFinalProject/menulist/{{comp.id}}"><font size="4" color="green">{{comp}}</font></a>
-</ul>
-{% endfor %}
-{% endblock %}
 
+
+<style type="text/css">
+
+.navigation li, ul.navigation li a {
+    background: url("http://a2.cdn-hotels.com/images/116048/iphone/sprite_bgs.png") repeat-x scroll 0 -50px #D9ECF5;
+    display: block;
+    font-size: 1.25em;
+    font-weight: bold;
+    padding: 10px 20px 7px 10px;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 1px -1px 1px #FFFFFF;
+}
+a {
+    color: #3399CC;
+}
+ul.navigation li {
+    font-size: 1em;
+}
+ul li {
+    font-size: 0.8125em;
+}
+ul.navigation {
+    list-style: none outside none;
+}
+ul {
+    list-style: none outside none;
+}
+
+
+
+
+
+
+ul.navigation li {
+    border-bottom: 1px solid #B8DBED;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+ul li {
+    font-size: 0.8125em;
+    margin: 0;
+    padding: 0;
+}
+ul.navigation {
+    list-style: none outside none;
+}
+
+ul.navigation {
+    clear: both;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style: none outside none;
+    margin: 0 10px;
+    padding: 0;
+}
+
+
+</style>
+
+<ul class="navigation">
+{% for comp in getCompany %}
+<li><a href="/MyFinalProject/menulist/{{comp.id}}">{{comp}}<span class="icon arrow_right"></span></a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+{% block title %}RESTAURANTS AVAILABLE{% endblock %}
 
 

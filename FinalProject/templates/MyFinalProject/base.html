@@ -3,10 +3,38 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        <title>Welcome To Restaurant</title>
+        <title>NextGEN MOBILE</title>
+
+	<style type="text/css">
+	html, body {
+	    color: #555555;
+	    font-family: arial,helvetica,clean,sans-serif;
+	    font-size: 16px;
+		margin: 0px;
+		padding: 0px;
+	}
+
+
+	h1 {
+	    background: url("http://a2.cdn-hotels.com/images/116048/iphone/sprite_bgs.png") repeat-x scroll 0 -200px transparent;
+	    border-bottom: 1px solid #EDC3AB;
+	    color: white;
+	    font-size: 1.25em;
+	    font-weight: bold;
+	    height: 43px;
+	    line-height: 43px;
+	    margin: 0;
+	    overflow: hidden;
+	    padding: 0 80px;
+	    text-align: center;
+	    text-shadow: 0 -1px 1px #000000;
+	}
+	</style>
     </head>
     <body>
+	<h1>{% block title %}MENU{% endblock%}</h1>
         <div id="content">
+
         {% block content %}
         {% endblock %}
         </div>
