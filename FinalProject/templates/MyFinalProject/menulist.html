@@ -9,13 +9,8 @@ float: left;
 clear: right;
 float: right;
 }
-
-
-
-
-
-
 </style>
+
 
 
 
@@ -24,15 +19,15 @@ float: right;
 <form name="Menu" method="post" action="/MyFinalProject/confirm">
 	<table>
 		{% for item in menuItems %}
-			<tr><td>{{item.name}}</td><td>GHC {{item.price}}</td>
-				<td>
+			<tr><td>
 				<select class="dropdown" name="item{{item.id}}">
 				<option value="0" default>0</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
+				<option value="other">other</option>
 				</select> 
-				</td>
+			    </td><td>{{item.name}}(s)</td><td>GHC {{item.price}}</td>
 			</tr>
 		{% endfor %}
 		<tr><td colspan="3">Phone Number:<input type="text" name="tel" size="10"></td></tr>
