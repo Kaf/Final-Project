@@ -62,7 +62,7 @@ def menuView(request, id):
 			#return HttpResponseRedirect(request.path) 
 	
 	t = loader.get_template('MyFinalProject/menulist.html')
-	c = Context({'Company':Company,'com':com, 'menuItems':menuItems})
+	c = Context({'com':com, 'menuItems':menuItems})
 	return HttpResponse(t.render(c))
 
 #Create neworder
@@ -77,8 +77,12 @@ def menuView(request, id):
 #neworder.price = totalprice
 #neworder.save
 @csrf_exempt
-def displayView(request):
-	newOrder = Order.objects.create(phonenumber=request.POST['tel'])
+def displayView(request,comp_id):
+	comp=Company.objects.get(pk=comp_id)
+	newstring=str(request.POST['tel'])
+	if len(newstring)<10 or len(newstring)>10:
+		return HttpResponse('Please input 10 numbers and there should be no spaces')
+	newOrder = Order.objects.create(phonenumber=request.POST['tel'],company = comp)
 	totalprice = 0
 	orderedfood= ' '
 	print request.POST
@@ -91,23 +95,35 @@ def displayView(request):
 			#orderedfood += 	"menu number:  "+str(MenuItem.objects.get(id=itemid).number)+"    "+ "item Name   :"+  str(MenuItem.objects.get(id=itemid).name)+"   " +" Price   " + v +"\n"	
 			orderedfood += 	str(MenuItem.objects.get(id=itemid).number)+".   "+ "Item:"+  str(MenuItem.objects.get(id=itemid).name)+"   " +"quantity  " + v +"\n"	
 	#newOrderItem = OrderItem.objects.create(order=newOrder, menuItem=mi)
-	newOrder.total=totalprice
+	newtotal = totalprice+(0.05 * totalprice)
+	newOrder.ourshare =(0.05 * totalprice)
+	newOrder.total=totalprice+(0.05 * totalprice)
 	newOrder.placedorder = orderedfood
 	newOrder.save()
 	t=loader.get_template('MyFinalProject/confirm.html')
-	c=Context({'totalprice':totalprice})
+	c=Context({'totalprice':totalprice,'newtotal':newtotal,'comp_id':comp_id})
 	return HttpResponse(t.render(c))
 
 
 
-def restaurantView(request):
-	#order=order.order_set.all().filter()
+def restaurantView(request,comp_id,check_id=0,checked=False):
+	comp=Company.objects.get(pk=comp_id)
+	print 'check_id',check_id
+	print 'checked',checked
 	#print order
-	orders = Order.objects.all().order_by('-created')
+	orders = Order.objects.filter(company=comp).order_by('-created')
 	for order in orders:
-		order.placedorder = order.placedorder.split('\n')[:-1]		
+		print 'order id',order.id
+		order.placedorder = order.placedorder.split('\n')[:-1]	
+		if int(check_id)==order.id:
+
+			if checked == "True":
+				order.ispaid = True	
+			elif checked == "False":
+				order.ispaid=False
+		order.save()	
 	t = loader.get_template('MyFinalProject/restaurant.html')
-	c = Context({'orders':orders})
+	c = Context({'orders':orders,'comp_id':comp_id})
 	return HttpResponse(t.render(c))
 	#customer=Customer.objects.get(order.customer)
 	#telNumber = customer.phonenumber	

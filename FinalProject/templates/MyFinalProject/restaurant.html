@@ -43,7 +43,8 @@ body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
 
 
 
-<a class="mHomeFeaturesItem" name="" href="">
+
+<form method="post" action="">
 {% for detail in orders %}
 	<h><b><i><hr>New Order</hr></i></b></h></br>
 	<h>The customer with telephone number <b>0{{detail.phonenumber}}</b> has ordered for the following menu items:</h>
@@ -51,16 +52,25 @@ body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
 	    <ul>{% for thing in detail.placedorder %}
 			<li>{{thing}}</li>
 		{% endfor %}
-	</ul>
-	   <div><b>Amount</b> :{{ detail.total }}</div>
-           <div><b>Date</b> :{{ detail.created }}</div>
-	   <div><b>Paid</b> :{{ detail.ispaid }}</div>
+	    </ul>
+	      <div><b>Amount</b> :{{ detail.total }}</div>
+              <div><b>Date</b> :{{ detail.created }}</div>
+		{% if detail.ispaid %}
+			<a class="mHomeFeaturesItem" name="" href="/MyFinalProject/restaurant/{{comp_id}}/check_{{detail.id}}=False">
+			<div><b>Paid</b> :{{ detail.ispaid }}<input type="checkbox" checked="yes" name="check"></div>
+		{% else %}
+			<a class="mHomeFeaturesItem" name="" href="/MyFinalProject/restaurant/{{comp_id}}/check_{{detail.id}}=True">
+			<div><b>Paid</b> :{{ detail.ispaid }}<input type="checkbox" name="check"></div>
+		{% endif %}
+			</a>
 	</ul>
 	</br>
 {% endfor %}
-</a>
+</form>
+
 {% endblock %}
 {% block title %}RESTAURANT{% endblock%}
+
 
 
 

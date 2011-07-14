@@ -25,10 +25,12 @@ class MenuItem(models.Model):
 
 class Order(models.Model):
 	total=models.FloatField(blank=True,null=True)
+	ourshare = models.FloatField(blank=True,null=True)
 	ispaid =  models.BooleanField()
 	phonenumber = models.IntegerField(blank=True,null=True)
 	placedorder = models.TextField()
-	created     =  models.DateTimeField(auto_now=True)
+	created     =  models.DateTimeField(auto_now_add=True)
+	company = models.ForeignKey(Company)
 	def __unicode__(self):
 		return str(self.total)+"  "+ str(self.phonenumber)
 
@@ -41,8 +43,7 @@ class Payment(models.Model):
 		return str(self.amount)+","+str(self.date)
 
 class OrderItem(models.Model):
-	Quant = (('1','1'),('2','2'))
-	quantity= models.IntegerField(choices = Quant) 
+	quantity= models.IntegerField() 
 	menuitem = models.ForeignKey(MenuItem)
 	order = models.ForeignKey(Order)
 	

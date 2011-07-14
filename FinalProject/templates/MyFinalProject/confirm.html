@@ -1,6 +1,15 @@
 {% extends "MyFinalProject/base.html" %}
+
 {% block content %}
+<style type="text/css">
+
+</style>
+
+
 <p>Dear Customer</p>
 	<h>You have placed an order of  GHC {{totalprice}} </h></br>
-		<h>Please Pay your money via TigoCash,MTN mobile Money or i Wallet</h>		
+	<h>but for using this application,you have been charged an extra 5% of your cost</h></br>
+	<h>Therefore your total cost is GHC {{newtotal}} </h></br>
+		<h>Please Pay your money via TigoCash or MTN mobile Money </h>	
+	
 {% endblock %}
