@@ -113,7 +113,7 @@ def restaurantView(request,comp_id,check_id=0,checked=False):
 	#print order
 	orders = Order.objects.filter(company=comp).order_by('-created')
 	for order in orders:
-		print 'order id',order.id
+		#print 'order id',order.id
 		order.placedorder = order.placedorder.split('\n')[:-1]	
 		if int(check_id)==order.id:
 

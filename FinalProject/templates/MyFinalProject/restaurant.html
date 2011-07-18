@@ -49,11 +49,9 @@ body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
 	<h><b><i><hr>New Order</hr></i></b></h></br>
 	<h>The customer with telephone number <b>0{{detail.phonenumber}}</b> has ordered for the following menu items:</h>
 	<ul>
-	    <ul>{% for thing in detail.placedorder %}
-			<li>{{thing}}</li>
-		{% endfor %}
-	    </ul>
+	 
 	      <div><b>Amount</b> :{{ detail.total }}</div>
+	     <div><b>Order:{{ detail.placedorder }}</div>
               <div><b>Date</b> :{{ detail.created }}</div>
 		{% if detail.ispaid %}
 			<a class="mHomeFeaturesItem" name="" href="/MyFinalProject/restaurant/{{comp_id}}/check_{{detail.id}}=False">
